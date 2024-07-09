@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 
-const Organisation = require("../models/organisationModel");
 const User = require("../models/userModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
@@ -24,6 +23,8 @@ exports.getOne = (Model, popOptions) =>
       message: "User record retrived successful",
       data,
     });
+
+    next();
   });
 
 exports.getAllOrg = (Model) =>
@@ -49,6 +50,8 @@ exports.getAllOrg = (Model) =>
         organisations,
       },
     });
+
+    next();
   });
 
 exports.getOneOrg = (Model, popOptions) =>
@@ -83,6 +86,8 @@ exports.getOneOrg = (Model, popOptions) =>
       message: "User record retrived successful",
       data,
     });
+
+    next();
   });
 
 exports.createOneOrg = (Model, popOptions) =>
@@ -117,17 +122,17 @@ exports.createOneOrg = (Model, popOptions) =>
       });
     }
 
-    // next();
+    next();
   });
 
-exports.addUserToOrg = () =>
+exports.addUserToOrg = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
     const { userId } = req.body;
     const { orgId } = req.params;
 
     // Find the user and organization
     const user = await User.findById(userId);
-    const organisation = await Organisation.findById(orgId);
+    const organisation = await Model.findById(orgId);
 
     if (!user || !organisation) {
       return res.status(404).json({ error: "User or Organization not found" });
@@ -152,6 +157,8 @@ exports.addUserToOrg = () =>
       status: "success",
       message: "User added to organisation successfully",
     });
+
+    next();
   });
 
 const signToken = (id) =>

@@ -36,7 +36,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     return createSendToken(newUser, 201, req, res, "Registration successful");
   }
 
-  return res.status(400).json({
+  res.status(400).json({
     status: "Bad request",
     message: "Registration unsuccessful",
     statusCode: 400,
@@ -71,6 +71,8 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   // 3) If everything ok, send token to client
   createSendToken(user, 200, req, res, "Login successful");
+
+  next();
 });
 
 exports.protect = catchAsync(async (req, res, next) => {

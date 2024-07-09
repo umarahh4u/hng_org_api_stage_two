@@ -9,4 +9,4 @@ const {
 exports.getAllOrganisations = getAllOrg(Organisation);
 exports.getOrganisations = getOneOrg(Organisation);
 exports.createOrganisation = createOneOrg(Organisation);
-exports.addUserToOrganization = addUserToOrg();
+exports.addUserToOrganization = addUserToOrg(Organisation);
