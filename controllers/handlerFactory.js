@@ -159,7 +159,7 @@ const signToken = (id) =>
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
-exports.createSendToken = (user, statusCode, req, res) => {
+exports.createSendToken = (user, statusCode, req, res, msg) => {
   const token = signToken(user._id);
 
   res.cookie("jwt", token, {
@@ -178,7 +178,7 @@ exports.createSendToken = (user, statusCode, req, res) => {
 
   res.status(statusCode).json({
     status: "success",
-    message: "Registration successful",
+    message: msg,
     data: {
       accessToken: token,
       user,

@@ -33,10 +33,10 @@ exports.signup = catchAsync(async (req, res, next) => {
     newUser.organisations.push(organisation._id);
     await newUser.save();
 
-    return createSendToken(newUser, 201, req, res);
+    return createSendToken(newUser, 201, req, res, "Registration successful");
   }
 
-  res.status(400).json({
+  return res.status(400).json({
     status: "Bad request",
     message: "Registration unsuccessful",
     statusCode: 400,
@@ -70,17 +70,8 @@ exports.login = catchAsync(async (req, res, next) => {
     });
   }
   // 3) If everything ok, send token to client
-  createSendToken(user, 200, req, res);
+  createSendToken(user, 200, req, res, "Login successful");
 });
-
-exports.logout = (req, res) => {
-  res.cookie("jwt", "loggedout", {
-    expires: new Date(Date.now() + 10 * 1000),
-    httpOnly: true,
-  });
-
-  res.status(200).json({ status: "success" });
-};
 
 exports.protect = catchAsync(async (req, res, next) => {
   // 1) getting token and check if its there
