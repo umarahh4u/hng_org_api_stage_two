@@ -8,7 +8,7 @@
     "api/*.js": {
       "maxDuration": 40
     },
-    "./app.js": {
+    "app.js": {
       "maxDuration": 40
     }
   }
