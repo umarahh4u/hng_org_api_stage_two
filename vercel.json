@@ -7,9 +7,6 @@
     },
     "api/*.js": {
       "maxDuration": 40
-    },
-    "app.js": {
-      "maxDuration": 40
     }
   }
 }
