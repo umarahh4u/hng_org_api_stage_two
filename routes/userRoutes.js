@@ -4,8 +4,8 @@ const { signup, login, protect } = require("../controllers/authController");
 
 const router = express.Router();
 
-router.post("/api/auth/register", signup);
-router.post("/api/auth/login", login);
+router.post("/auth/register", signup);
+router.post("/auth/login", login);
 router.use(protect);
 
 router.get("/api/users/:id", getUser);
